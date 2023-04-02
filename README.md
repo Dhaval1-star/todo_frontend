@@ -1,70 +1,216 @@
-# Getting Started with Create React App
+## Link For The BackEnd Of Todo App : https://github.com/Dhaval1-star/MERN_TODO
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Todo App with Login System
 
-## Available Scripts
+This is a Todo app with a login system that allows users to create, view, edit, and delete tasks. Each user has their own set of tasks that they can manage independently of other users. The app also includes a login system that requires users to authenticate before accessing their tasks.
 
-In the project directory, you can run:
+## Features
+- User authentication system that requires users to sign up and login to access their tasks
+- Secure password hashing using bcrypt
+- Ability to create, view, edit, and delete tasks
+- Mark tasks as complete or incomplete
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
+1. Clone this repository: `git clone https://github.com/Dhaval1-star/todo_frontend.git`
+2. Navigate to the project directory: `cd Folder-Name`
+3. Install dependencies: `npm install`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Usage
+1. Start the application: `npm start`
+2. Open your web browser and go to http://localhost:3000
+3. Click on "Sign Up" to create a new account or "Log In" to access an existing account.
+4. Once logged in, you can create new tasks, view existing tasks, edit tasks, and mark tasks as complete or incomplete.
+5. You can also sort and filter your tasks to help you organize your work.
 
-### `npm test`
+## Technologies Used
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+- React
+- Bootstrap
+- Passport.js
+- Bcrypt
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## License
+This project is licensed under the MIT license. See the LICENSE file for more information.
 
-### `npm run build`
+# Node Backend Project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is a Node.js backend project that uses Express for handling HTTP requests and MongoDB for the database. The project includes user authentication and authorization using JSON Web Tokens (JWT), as well as routes for managing todos.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository and navigate to the project directory.
+    ```
+    git clone <repository-url>
+    cd <project-directory>
+    ```
 
-### `npm run eject`
+2. Install dependencies.
+    ```
+    npm install
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Create a `.env` file in the project directory and add the required environment variables.
+    ```
+    PORT=<port-number>
+    MONGODB_URI=<mongodb-uri>
+    JWT_SECRET=<jwt-secret>
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Start the server.
+    ```
+    npm start
+    ```
+## Endpoints
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Authentication
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- POST `/api/v1/auth/register`
+  - Description: Create a new user account with email and password.
+  - Request body:
+    ```
+    {
+        "email": <string>,
+        "password": <string>
+    }
+    ```
+  - Response body:
+    ```
+    {
+        "user": {
+            "_id": <string>,
+            "email": <string>
+        },
+        "accessToken": <string>,
+        "refreshToken": <string>
+    }
+    ```
 
-## Learn More
+- POST `/api/v1/auth/login`
+  - Description: Login with email and password to get access and refresh tokens.
+  - Request body:
+    ```
+    {
+        "email": <string>,
+        "password": <string>
+    }
+    ```
+  - Response body:
+    ```
+    {
+        "user": {
+            "_id": <string>,
+            "email": <string>
+        },
+        "accessToken": <string>,
+        "refreshToken": <string>
+    }
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- POST `/api/v1/auth/refresh`
+  - Description: Get a new access token with a valid refresh token.
+  - Request body:
+    ```
+    {
+        "refreshToken": <string>
+    }
+    ```
+  - Response body:
+    ```
+    {
+        "user": {
+            "_id": <string>,
+            "email": <string>
+        },
+        "accessToken": <string>
+    }
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Todos
 
-### Code Splitting
+- GET `/api/v1/todos`
+  - Description: Get all todos for the authenticated user.
+  - Request headers:
+    ```
+    Authorization: Bearer <access-token>
+    ```
+  - Response body:
+    ```
+    [
+        {
+            "_id": <string>,
+            "description": <string>,
+            "completed": <boolean>
+        },
+        ...
+    ]
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- POST `/api/v1/todos`
+  - Description: Create a new todo for the authenticated user.
+  - Request headers:
+    ```
+    Authorization: Bearer <access-token>
+    ```
+  - Request body:
+    ```
+    {
+        "description": <string>
+    }
+    ```
+  - Response body:
+    ```
+    {
+        "_id": <string>,
+        "description": <string>,
+        "completed": <boolean>
+    }
+    ```
 
-### Analyzing the Bundle Size
+- PATCH `/api/v1/todos/:id`
+  - Description: Update a todo for the authenticated user.
+  - Request headers:
+    ```
+    Authorization: Bearer <access-token>
+    ```
+  - Request parameters:
+    ```
+    id: <string>
+    ```
+  - Request body:
+    ```
+    {
+        "description": <string>,
+        "completed": <boolean>
+    }
+    ```
+  - Response body:
+    ```
+    {
+        "_id": <string>,
+        "description": <string>,
+        "completed": <boolean>
+    }
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- DELETE `/api/v1/todos/:id`
+  - Description: Delete a todo for the authenticated user.
+  - Request headers:
+    ```
+    Authorization: Bearer <access-token>
+    ```
+  - Request parameters:
+    ```
+    id: <string>
+    ```
+  - Response body:
+    ```
+    {
+        "_id": <string>,
+        "description": <string>,
+        "completed": <boolean>
+    }
+    ```
