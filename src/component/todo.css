@@ -1,0 +1,136 @@
+.todo-container{
+    font-family: 'Poppins', sans-serif !important;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-minicontainer{
+    width: 50%;
+    /* height: 400px; */
+    background: rgba(128, 128, 128, 0.201);
+    margin: 100px 0px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    padding: 10px 20px;
+}
+
+.addTodo{
+    width: 100%;
+}
+
+.Todo-input{
+    width: 100%;
+    padding: 10px 0px;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+}
+
+.Todo-input input{
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #00000084;
+    padding: 6px 10px;
+    font-family: Poppins;
+    box-sizing: border-box; 
+}
+
+input::-webkit-input-placeholder {
+    color: #00000084; 
+  }
+  input::-moz-placeholder {
+    color: #00000084; 
+  }
+  input:-ms-input-placeholder {
+    color: #00000084; 
+  }
+  input:-moz-placeholder {
+    color: #00000084; 
+  }
+  input:focus {
+    border-bottom: 1px solid #222; 
+  }
+    input:focus::-webkit-input-placeholder {
+      color: #222; 
+    }
+    input:focus::-moz-placeholder {
+      color: #222; 
+    }
+    input:focus:-ms-input-placeholder {
+      color: #222; 
+    }
+    input:focus:-moz-placeholder {
+      color: #222; 
+    }
+
+
+    .form-submit {
+        text-align: center;
+        display: inline-block;
+        background: #0c69f1;
+        color: #fff;
+        border-bottom: none;
+        width: 150px;
+        padding: 12px 0px;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -o-border-radius: 5px;
+        -ms-border-radius: 5px;
+        /* margin-top: 25px; */
+        margin: 25px auto 0px auto;
+        cursor: pointer; 
+    }
+
+    .showtodo .main{
+        margin: 10px 0px;
+    }
+      
+.main p{
+    padding-bottom: 0px !important;
+}
+
+.col-sm-4 .row > *{
+    padding-right: 0px !important;
+}
+
+.form-submit.new{
+    font-size: 14px;
+    padding: 8px 0px;
+}
+
+.main.container{
+    box-shadow: none;
+}
+
+.main.container .row{
+    display: flex;
+    align-items: center;
+
+}
+
+.main.container .row p{
+    /* height: 35px; */
+    padding: 5px 0px 10px 5px;
+    background: white;
+}
+
+.main.container:hover .row p{
+    color: #222;
+}
+
+.main.container .row > *{
+    padding-left: 0px;
+}
+
+.form-check label[for="inline-radio-1"]{
+  margin: -2px 42px;
+}
+
+.form-check label[for="inline-radio-2"]{
+  margin: 38px 40px;
+
+}
